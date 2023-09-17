@@ -3,47 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drag and drop website</title>
-    <link rel="stylesheet" href="style.css">
+    <title>counter</title>
+    <link rel="stylesheet" href="style.css" >
 </head>
-<body>
-    <div class="container">
-        <div id="left">
-            <div class="list" draggable="true"><img src="drag_drop_icon.png">List of Item 1</div>
-            <div class="list" draggable="true"><img src="drag_drop_icon.png">List of Item 2</div>
-            <div class="list" draggable="true"><img src="drag_drop_icon.png">List of Item 3</div>
-            <div class="list" draggable="true"><img src="drag_drop_icon.png">List of Item 4</div>
+<body  >
+    <main>
+        <div class="container">
+            <h1>counter</h1>
+            <span id="value">0</span>
+            <div class="button-container">
+                <button class="btn decrease">decrease</button>
+                <button class="btn reset">reset</button>
+                <button class="btn increase">increase</button>
+            </div>
+
         </div>
-        <div id="right"></div>
-    </div>
+    </main>
 
     <script>
+        let count = 0;
 
-        let lists = document.getElementByClassName("list");
-        let rightBox = document.getElementById("right");
-        let leftBox = document.getElementById("left");
-
-        for(list of lists){
-            list.addEventListener("dragstart",function(e){
-                let selected =e.target;
-
-                rightBox.addEventListener("dragover",function(e){
-                    e.preventDefault();
-                });
-                rightBox.addEventListener("drop",function(e){
-                    rightBox.appendChild(selected);
-                    selected = null;
-                })
-                leftBox.addEventListener("dragover",function(e){
-                    e.preventDefault();
-                });
-                leftBox.addEventListener("drop",function(e){
-                    leftBox.appendChild(selected);
-                    selected = null;
-                })
+        const value = document.querySelector('#value')
+        const btns = document.querySelectorAll(".btn")
+        
+        btns.forEach(function(btn){
+            btn.addEventListener("click",function(e){
+                const styles = e.currentTarget.classList;
+                if(styles.contains("decrease")){
+                    count--;
+                }
+                else if(style.contains("increase")){
+                    count++;
+                }
+                else {
+                    count= 0;
+                }
+                if(count>0){
+                    value.style.color ='green'
+                }
+                if(count < 0){
+                    value.style.color ="red"
+                }
+                if(count=0){
+                    value.style.color ="black"
+                }
+                value.textContent = count;
             })
-        }
+        })
+
+
 
     </script>
 </body>
+
 </html>
